@@ -1,0 +1,40 @@
+@startuml Containers
+' Дает более подробное представление о системе
+
+!include <C4/C4_Component>
+
+' ___ Настройки рисования диаграммы ___
+
+
+' ___ Тэги связей ___
+AddRelTag(async, "black", "black", "dotted")
+
+
+' ___ Подключаемые компоненты ___
+' Акторы
+!include libraries/actors/client.iuml
+
+
+System_Boundary(system_boundary, "System boundary" ) {
+    ' Тут необходимо расписать систему к оторой обращался пользвователь на уровне L1
+    !include libraries/containers/container.iuml
+    !include libraries/containers/monolith.iuml
+}
+
+
+' Внешнии системы
+!include libraries/external_systems/external_system.iuml
+
+
+' ___ Связи ___
+' Основное
+Rel(client, monolith, "Отправляет данные в")
+Rel(monolith, external_system, "Запрашивает данные в")
+Rel(monolith, container, "Отправляет событие в", $tags="async")
+
+
+' Акторы (пользователи)
+
+
+
+@enduml

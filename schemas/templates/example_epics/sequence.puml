@@ -1,0 +1,13 @@
+@startuml Название схемы
+
+title Название схемы
+
+actor Клиент as client
+participant Система as system
+
+==Название процесса==
+
+client -> system : /api/v1/products
+return 
+
+@enduml

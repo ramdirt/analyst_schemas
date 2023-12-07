@@ -1,0 +1,36 @@
+@startuml Context
+' Дает верхнеуровневое представление о системе
+
+!include <C4/C4_Component>
+
+' ___ Настройки рисования диаграммы ___
+
+
+' ___ Тэги связей ___
+' AddRelTag(async, "black", "black", "dotted")
+
+
+
+' ___ Подключаемые компоненты ___
+' Акторы
+!include libraries/actors/client.iuml
+
+' Основная система
+!include libraries/systems/system.iuml
+
+' Внешнии системы
+!include libraries/external_systems/external_system.iuml
+
+
+' ___ Связи ___
+' Основное
+Rel(client, system, "Отправляет данные в")
+Rel(system, client, "Отправляет ответ")
+Rel(system, external_system, "Запрашивает данные в")
+
+
+' Акторы (пользователи)
+
+
+
+@enduml

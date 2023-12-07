@@ -1,0 +1,36 @@
+@startuml Указать название диаграммы, оно будет использоваться при экспорте
+
+' ___ Подключаемые модули ___
+!include <C4/C4_Component>
+
+' ___ Настройки рисования диаграммы ___
+
+
+
+' ___ Тэги связей ___
+AddRelTag(async, "black", "black", "dotted")
+
+
+
+' ___ Подключаемые компоненты ___
+' Акторы
+!include libraries/actors/client.iuml
+
+' Внутренни системы
+!include libraries/containers/container.iuml
+
+' Внешнии системы
+!include libraries/external_systems/external_system.iuml
+
+' ___ временное место ___
+System_Ext(template_system, "Шаблонная система")
+
+
+
+' ___ Связи ___
+Rel(client, container, "Отправляет что-то в")
+Rel(container, external_system, "Отправляет данные в", $tags="async")
+Rel(external_system, container, "Возвращает даннные в")
+Rel(container, template_system, "Вызывает")
+
+@enduml
